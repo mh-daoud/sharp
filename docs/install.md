@@ -20,18 +20,20 @@ Node.js v10.16.0+ on the most common platforms:
 * macOS x64 (>= 10.13)
 * Linux x64 (glibc >= 2.17, musl >= 1.1.24)
 * Linux ARM64 (glibc >= 2.29)
-* Windows
+* Windows x64
+* Windows x86
 
-A ~7MB tarball containing libvips and its most commonly used dependencies
+A ~9MB tarball containing libvips and its most commonly used dependencies
 is downloaded via HTTPS and stored within `node_modules/sharp/vendor` during `npm install`.
 
 This provides support for the
-JPEG, PNG, WebP, TIFF, GIF (input) and SVG (input) image formats.
+JPEG, PNG, WebP, AVIF, TIFF, GIF (input) and SVG (input) image formats.
 
 The following platforms have prebuilt libvips but not sharp:
 
 * Linux ARMv6
 * Linux ARMv7 (glibc >= 2.28)
+* Windows ARM64
 
 The following platforms require compilation of both libvips and sharp from source:
 
@@ -69,7 +71,7 @@ The use of a globally-installed libvips is unsupported on Windows.
 This module will be compiled from source at `npm install` time when:
 
 * a globally-installed libvips is detected (set the `SHARP_IGNORE_GLOBAL_LIBVIPS` environment variable to skip this),
-* prebuilt binaries do not exist for the current platform and Node.js version, or
+* prebuilt sharp binaries do not exist for the current platform, or
 * when the `npm install --build-from-source` flag is used.
 
 Building from source requires:
@@ -163,20 +165,6 @@ docker run -v "$PWD":/var/task lambci/lambda:build-nodejs12.x npm install sharp
 
 To get the best performance select the largest memory available.
 A 1536 MB function provides ~12x more CPU time than a 128 MB function.
-
-## Electron
-
-Electron provides versions of the V8 JavaScript engine
-that are incompatible with Node.js.
-To ensure the correct binaries are used, run the following:
-
-```sh
-npm install
-npx electron-rebuild
-```
-
-Further help can be found at
-[https://electronjs.org/docs/tutorial/using-native-node-modules](https://electronjs.org/docs/tutorial/using-native-node-modules)
 
 ## Worker threads
 
