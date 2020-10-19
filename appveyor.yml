@@ -21,6 +21,7 @@ environment:
     prebuild_upload: ""
 install:
   - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:platform
+  - npm install -g npm@7
   - npm install
 test_script:
   - npm test

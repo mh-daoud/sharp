@@ -27,9 +27,11 @@ jobs:
       dist: bionic
       language: shell
       before_install:
+        - sudo chown 0.0 ${PWD}
         - sudo docker run -dit --name sharp --env CI --volume "${PWD}:/mnt/sharp" --workdir /mnt/sharp centos:7
         - sudo docker exec sharp bash -c "curl -sL https://rpm.nodesource.com/setup_14.x | bash -"
         - sudo docker exec sharp yum install -y gcc-c++ make git nodejs
+        - sudo docker exec sharp npm install -g npm@7
       install: sudo docker exec sharp bash -c "npm install --unsafe-perm"
       script: sudo docker exec sharp bash -c "npm test"
 
@@ -123,7 +125,9 @@ jobs:
       osx_image: xcode10.1
       language: node_js
       node_js: "14"
-      before_install: unset prebuild_upload
+      before_install:
+        - unset prebuild_upload
+        - npm install -g npm@7
 
     - name: "Unit test coverage report"
       os: linux
