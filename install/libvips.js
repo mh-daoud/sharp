@@ -3,7 +3,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const stream = require('stream');
+const stream = require('readable-stream');
 const zlib = require('zlib');
 
 const detectLibc = require('detect-libc');
